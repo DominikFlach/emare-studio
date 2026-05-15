@@ -1,0 +1,1197 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EMARÉ Studio · Emelie Marie · Contemporary Art</title>
+  <meta name="description" content="EMARÉ Studio — Atelier von Emelie Marie. Contemporary Art, Acryl und Spray auf selbst gefertigter Leinwand. München, DE.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,200;0,300;0,400;0,500;1,200;1,300&display=swap" rel="stylesheet">
+  <style>
+/* ============================================================
+   EMARÉ Studio — Site styles
+   Raleway · pure white · pure black
+   ============================================================ */
+
+* { box-sizing: border-box; }
+
+:root {
+  --bg: #ffffff;
+  --ink: #000000;
+  --ink-2: #595959;
+  --ink-3: #8a8a8a;
+  --rule: #ebebeb;
+  --rule-2: #d8d8d8;
+  --paper: #f6f4ef;
+}
+
+html, body {
+  margin: 0; padding: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Raleway', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 300;
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+img, svg { display: block; max-width: 100%; }
+
+a {
+  color: inherit;
+  text-decoration: none;
+  position: relative;
+}
+
+::selection { background: var(--ink); color: var(--bg); }
+
+/* ---------- Typography ---------- */
+.label {
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+/* ---------- Header / Nav ---------- */
+.site-header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 22px 48px;
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  transition: padding 0.3s, background 0.3s;
+}
+.site-header--scrolled {
+  padding: 14px 48px;
+  background: rgba(255,255,255,0.96);
+}
+.site-header__brand {
+  font-weight: 300;
+  font-size: 26px;
+  letter-spacing: 0.07em;
+  line-height: 1;
+}
+.site-header__brand b { font-weight: 400; }
+.site-header__brand small {
+  display: block;
+  font-size: 13px;
+  letter-spacing: 0.18em;
+  color: var(--ink-3);
+  margin-top: 8px;
+  font-weight: 300;
+}
+.site-nav {
+  display: flex; gap: 36px;
+  align-items: center;
+}
+.site-nav a {
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 500;
+  padding: 4px 0;
+  position: relative;
+}
+.site-nav a::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: -3px;
+  height: 1px; background: var(--ink);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s cubic-bezier(0.6, 0, 0.2, 1);
+}
+.site-nav a:hover::after,
+.site-nav a.active::after { transform: scaleX(1); }
+
+/* ---------- Footer ---------- */
+.site-footer {
+  border-top: 1px solid var(--rule);
+  padding: 48px 48px 32px;
+  margin-top: 120px;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 48px;
+  font-size: 12px;
+}
+.site-footer__brand {
+  font-weight: 300;
+  font-size: 14px;
+  letter-spacing: 0.06em;
+}
+.site-footer h4 {
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 500;
+  margin: 0 0 14px;
+  color: var(--ink);
+}
+.site-footer a { display: block; line-height: 2; color: var(--ink-2); }
+.site-footer a:hover { color: var(--ink); }
+.site-footer__legal {
+  grid-column: 1 / -1;
+  border-top: 1px solid var(--rule);
+  padding-top: 24px;
+  margin-top: 24px;
+  display: flex; justify-content: space-between;
+  font-size: 11px; color: var(--ink-3);
+}
+
+/* ---------- Utility ---------- */
+.btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+  font-weight: 500;
+  padding: 14px 24px;
+  border: 1px solid var(--ink);
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+  transition: background 0.25s, color 0.25s;
+  font-family: inherit;
+}
+.btn:hover { background: var(--ink); color: var(--bg); }
+.btn--ghost { border-color: transparent; padding-left: 0; padding-right: 0; }
+.btn--ghost::after { content: '→'; margin-left: 8px; transition: margin 0.25s; }
+.btn--ghost:hover { background: transparent; color: var(--ink); }
+.btn--ghost:hover::after { margin-left: 14px; }
+
+/* ---------- Artwork frames ---------- */
+.artwork {
+  display: block;
+  background: var(--paper);
+  position: relative;
+  overflow: hidden;
+}
+.artwork svg { display: block; width: 100%; height: 100%; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px) {
+  .site-header { padding: 16px 22px; }
+  .site-nav { gap: 20px; }
+  .site-nav a { font-size: 10px; letter-spacing: 0.16em; }
+  .site-footer { grid-template-columns: 1fr; padding: 32px 22px; gap: 28px; }
+}
+  </style>
+  <style>
+/* ============================================================
+   EMARÉ Studio — Page-specific styles
+   ============================================================ */
+
+/* ---------- Reveal animation ---------- */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 1s cubic-bezier(0.2, 0.7, 0.2, 1), transform 1s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+[data-reveal].is-revealed { opacity: 1; transform: none; }
+[data-reveal-delay="1"] { transition-delay: 0.12s; }
+[data-reveal-delay="2"] { transition-delay: 0.24s; }
+[data-reveal-delay="3"] { transition-delay: 0.36s; }
+
+/* ============================================================
+   HOMEPAGE HERO
+   ============================================================ */
+.home-hero {
+  position: relative;
+  min-height: 100vh;
+  padding: 140px 48px 100px;
+  overflow: hidden;
+}
+.home-hero__inner {
+  position: relative;
+  max-width: 1480px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+  min-height: calc(100vh - 240px);
+}
+.home-hero__left {
+  position: relative;
+  z-index: 3;
+}
+.home-hero__title {
+  font-weight: 200;
+  font-size: clamp(64px, 9vw, 156px);
+  line-height: 0.88;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+  mix-blend-mode: multiply;
+}
+.home-hero__title em { font-style: italic; font-weight: 200; }
+.home-hero__caption {
+  margin-top: 36px;
+  max-width: 420px;
+  font-size: 16px;
+  line-height: 1.65;
+  font-weight: 300;
+  color: var(--ink);
+}
+.home-hero__art {
+  position: relative;
+  z-index: 2;
+  justify-self: end;
+  width: min(100%, 560px);
+  aspect-ratio: 4 / 5;
+}
+.home-hero__art-frame {
+  position: absolute;
+  inset: 0;
+  background: var(--paper);
+  overflow: hidden;
+}
+.home-hero__meta {
+  position: absolute;
+  top: 140px;
+  right: 48px;
+  z-index: 4;
+  text-align: right;
+  font-size: 11px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+.home-hero__meta-rule {
+  width: 64px;
+  height: 1px;
+  background: var(--ink);
+  margin: 12px 0 12px auto;
+}
+.home-hero__cue {
+  position: absolute;
+  bottom: 36px; left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  z-index: 4;
+}
+.home-hero__cue .label { color: var(--ink-2); font-size: 10px; }
+.home-hero__cue-line {
+  width: 1px;
+  height: 32px;
+  background: var(--ink);
+  margin: 14px auto 0;
+  animation: cueScroll 2.4s ease-in-out infinite;
+  transform-origin: top;
+}
+@keyframes cueScroll {
+  0%, 100% { transform: scaleY(1); opacity: 0.4; }
+  50% { transform: scaleY(1.4); opacity: 1; }
+}
+
+/* ============================================================
+   Featured work sections
+   ============================================================ */
+.featured {
+  position: relative;
+  padding: 160px 48px;
+  overflow: hidden;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+}
+.featured__inner {
+  position: relative;
+  max-width: 1480px;
+  margin: 0 auto;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+.featured--reverse .featured__inner { direction: rtl; }
+.featured--reverse .featured__inner > * { direction: ltr; }
+.featured__art {
+  width: min(100%, 520px);
+  aspect-ratio: 4 / 5;
+  position: relative;
+}
+.featured--reverse .featured__art { justify-self: end; }
+.featured__text { max-width: 460px; }
+.featured__number {
+  font-size: 11px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--ink-2);
+}
+.featured__title {
+  font-weight: 200;
+  font-size: clamp(40px, 5vw, 72px);
+  line-height: 0.98;
+  letter-spacing: -0.015em;
+  margin: 18px 0 0;
+}
+.featured__sub {
+  font-size: 13px;
+  color: var(--ink-2);
+  margin-top: 12px;
+  letter-spacing: 0.04em;
+}
+.featured__desc {
+  margin-top: 36px;
+  font-size: 16px;
+  line-height: 1.7;
+  font-weight: 300;
+  max-width: 420px;
+}
+.featured__cta { margin-top: 36px; }
+
+/* ============================================================
+   HANDWERK & QUALITÄT — Accordion
+   ============================================================ */
+.craft {
+  padding: 140px 48px;
+  border-top: 1px solid var(--rule);
+  position: relative;
+}
+.craft__inner {
+  max-width: 1480px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 96px;
+  align-items: start;
+}
+.craft__head {
+  position: sticky;
+  top: 120px;
+}
+.craft__intro {
+  margin-top: 32px;
+  font-size: 16px;
+  line-height: 1.75;
+  font-weight: 300;
+  color: var(--ink-2);
+  max-width: 420px;
+}
+.craft__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border-top: 1px solid var(--rule);
+}
+.craft__item { border-bottom: 1px solid var(--rule); }
+.craft__item details { width: 100%; }
+.craft__item summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 28px 8px 28px 0;
+  display: grid;
+  grid-template-columns: 1fr 28px;
+  gap: 24px;
+  align-items: center;
+  transition: padding 0.4s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.craft__item summary::-webkit-details-marker { display: none; }
+.craft__item summary::marker { content: ''; }
+.craft__item summary:hover { padding-left: 12px; }
+.craft__name {
+  font-weight: 200;
+  font-size: clamp(26px, 2.6vw, 36px);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+.craft__icon {
+  position: relative;
+  width: 18px;
+  height: 18px;
+  justify-self: end;
+}
+.craft__icon::before,
+.craft__icon::after {
+  content: '';
+  position: absolute;
+  top: 50%; left: 0;
+  width: 100%; height: 1px;
+  background: var(--ink);
+  transition: transform 0.4s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.craft__icon::after { transform: rotate(90deg); }
+.craft__item details[open] .craft__icon::after { transform: rotate(0deg); }
+.craft__body {
+  padding: 0 24px 32px 0;
+  max-width: 620px;
+  font-size: 15px;
+  line-height: 1.75;
+  font-weight: 300;
+  color: var(--ink-2);
+  animation: craftReveal 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+@keyframes craftReveal {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* ============================================================
+   Works index list
+   ============================================================ */
+.works-index {
+  padding: 140px 48px;
+  border-top: 1px solid var(--rule);
+  position: relative;
+}
+.works-index__head {
+  max-width: 1480px;
+  margin: 0 auto 64px;
+  display: flex; justify-content: space-between; align-items: baseline;
+}
+.works-index__title {
+  font-weight: 200;
+  font-size: clamp(40px, 5vw, 64px);
+  line-height: 1;
+  letter-spacing: -0.015em;
+  margin: 0;
+}
+.works-index__list {
+  max-width: 1480px;
+  margin: 0 auto;
+  list-style: none;
+  padding: 0;
+}
+.works-index__row {
+  display: grid;
+  grid-template-columns: 64px 1fr 1fr 200px 32px;
+  gap: 32px;
+  padding: 28px 0;
+  border-top: 1px solid var(--rule);
+  align-items: baseline;
+  transition: padding 0.4s cubic-bezier(0.2, 0.7, 0.2, 1);
+  cursor: pointer;
+  position: relative;
+}
+.works-index__row:last-child { border-bottom: 1px solid var(--rule); }
+.works-index__row:hover { padding-left: 16px; }
+.works-index__row:hover .works-index__title-text { letter-spacing: 0.01em; }
+.works-index__num {
+  font-size: 12px;
+  letter-spacing: 0.22em;
+  font-weight: 500;
+  color: var(--ink-2);
+}
+.works-index__title-text {
+  font-weight: 300;
+  font-size: 28px;
+  letter-spacing: 0;
+  transition: letter-spacing 0.4s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.works-index__meta {
+  font-size: 12px;
+  color: var(--ink-2);
+  letter-spacing: 0.02em;
+}
+.works-index__year {
+  font-size: 13px;
+  color: var(--ink-2);
+  letter-spacing: 0.02em;
+}
+.works-index__arrow {
+  font-size: 16px;
+  text-align: right;
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: opacity 0.3s, transform 0.3s;
+}
+.works-index__row:hover .works-index__arrow { opacity: 1; transform: translateX(0); }
+
+/* Preview thumbnail that follows cursor */
+.works-index__preview {
+  position: fixed;
+  pointer-events: none;
+  width: 280px;
+  aspect-ratio: 4 / 5;
+  z-index: 90;
+  opacity: 0;
+  transition: opacity 0.3s;
+  transform: translate(-50%, -50%);
+}
+.works-index__preview.is-active { opacity: 1; }
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+@media (max-width: 900px) {
+  .home-hero { padding: 120px 22px 80px; }
+  .home-hero__inner { grid-template-columns: 1fr; gap: 40px; }
+  .home-hero__meta { right: 22px; }
+  .home-hero__art { justify-self: center; width: 100%; }
+  .featured { padding: 80px 22px; min-height: auto; }
+  .featured__inner { grid-template-columns: 1fr; gap: 40px; direction: ltr !important; }
+  .featured--reverse .featured__art { justify-self: start; }
+  .craft { padding: 80px 22px; }
+  .craft__inner { grid-template-columns: 1fr; gap: 40px; }
+  .craft__head { position: static; }
+  .craft__item summary { grid-template-columns: 1fr 20px; gap: 16px; padding: 22px 4px 22px 0; }
+  .craft__body { padding: 0 4px 24px 0; }
+  .works-index { padding: 80px 22px; }
+  .works-index__row { grid-template-columns: 36px 1fr 32px; gap: 16px; }
+  .works-index__meta,
+  .works-index__year { display: none; }
+}
+  </style>
+</head>
+<body data-screen-label="01 Home">
+
+  <header class="site-header">
+    <a href="index.html" class="site-header__brand" style="padding: 0px">
+      EMARÉ <b>Studio</b><small>by Emelie Marie</small>
+    </a>
+    <nav class="site-nav">
+      <a href="werke.html">Werke</a>
+      <a href="vita.html">Vita</a>
+      <a href="kontakt.html">Kontakt</a>
+    </nav>
+  </header>
+
+  <!-- ============================================================
+       HERO — Parallax: artwork + display title + meta
+       ============================================================ -->
+  <section class="home-hero" data-parallax-scene>
+    <div class="home-hero__meta" data-parallax="1">
+      <div class="label">Portfolio · 2026</div>
+      <div class="home-hero__meta-rule"></div>
+      <div class="label">06 Werke</div>
+    </div>
+
+    <div class="home-hero__inner">
+      <div class="home-hero__left" data-parallax="0.6" data-reveal>
+        <h1 class="home-hero__title">
+          Handmade.<br>
+          <em>Emotional.</em><br>
+          Real.
+        </h1>
+        <p class="home-hero__caption">
+          Jedes meiner Werke entsteht vollständig in Handarbeit — von der
+          selbst gebauten Leinwand bis zum maßgefertigten Rahmen. Ich
+          arbeite mit Farbe, Tiefe und Bewegung — Schicht für Schicht
+          entsteht etwas Eigenes, das sich zu etwas Einzigartigem verbindet.
+        </p>
+      </div>
+
+      <div class="home-hero__art" data-parallax="0.3" data-reveal data-reveal-delay="1">
+        <div class="home-hero__art-frame artwork" id="hero-art"></div>
+      </div>
+    </div>
+
+    <div class="home-hero__cue">
+      <div class="label">Scrollen</div>
+      <div class="home-hero__cue-line"></div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FEATURED 01 — Innenraum I (right)
+       ============================================================ -->
+  <section class="featured" data-parallax-scene>
+    <div class="featured__inner">
+      <div class="featured__text" data-parallax="0.85" data-reveal>
+        <div class="featured__number">Werk 01 / 06</div>
+        <h2 class="featured__title">Innenraum I</h2>
+        <div class="featured__sub">2025 · 120 × 160 cm · Acryl, Spray, Pigment</div>
+        <p class="featured__desc">
+          Eine ockerfarbene Linie liegt unter einem leisen Sprühnebel —
+          als würde der Raum durch das Pigment sichtbar.
+        </p>
+        <div class="featured__cta">
+          <a class="btn btn--ghost" href="werk.html?id=01">Werk ansehen</a>
+        </div>
+      </div>
+      <div class="featured__art artwork" data-parallax="0.5" data-reveal data-reveal-delay="1" id="featured-01" style="position:relative;"></div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FEATURED 02 — Membran (left)
+       ============================================================ -->
+  <section class="featured featured--reverse" data-parallax-scene>
+    <div class="featured__inner">
+      <div class="featured__text" data-parallax="0.85" data-reveal>
+        <div class="featured__number">Werk 02 / 06</div>
+        <h2 class="featured__title">Membran</h2>
+        <div class="featured__sub">2025 · 100 × 100 cm · Acryl &amp; Spray</div>
+        <p class="featured__desc">
+          Ein zentraler, fast atemloser Kern. Die Geste hat sich aufgelöst,
+          was bleibt ist eine durchlässige Form.
+        </p>
+        <div class="featured__cta">
+          <a class="btn btn--ghost" href="werk.html?id=02">Werk ansehen</a>
+        </div>
+      </div>
+      <div class="featured__art artwork" data-parallax="0.5" data-reveal data-reveal-delay="1" id="featured-02" style="position:relative;"></div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FEATURED 03 — Schwelle (right)
+       ============================================================ -->
+  <section class="featured" data-parallax-scene>
+    <div class="featured__inner">
+      <div class="featured__text" data-parallax="0.85" data-reveal>
+        <div class="featured__number">Werk 03 / 06</div>
+        <h2 class="featured__title">Schwelle</h2>
+        <div class="featured__sub">2025 · 140 × 180 cm · Acryl &amp; Spray</div>
+        <p class="featured__desc">
+          Diagonale zwischen Innen und Aussen. Salbei trifft auf warmes
+          Elfenbein, die Kante bleibt gemalt sichtbar.
+        </p>
+        <div class="featured__cta">
+          <a class="btn btn--ghost" href="werk.html?id=03">Werk ansehen</a>
+        </div>
+      </div>
+      <div class="featured__art artwork" data-parallax="0.5" data-reveal data-reveal-delay="1" id="featured-03" style="position:relative;"></div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       INDEX — alle Werke
+       ============================================================ -->
+  <section class="works-index">
+    <div class="works-index__head">
+      <h2 class="works-index__title" data-reveal>Alle Werke</h2>
+      <a class="btn btn--ghost" href="werke.html" data-reveal data-reveal-delay="1">Galerieansicht</a>
+    </div>
+    <ul class="works-index__list" id="works-index-list" data-reveal data-reveal-delay="2"></ul>
+  </section>
+
+  <!-- Preview thumbnail follows cursor in works index -->
+  <div class="works-index__preview artwork" id="works-index-preview" aria-hidden="true"></div>
+
+  <!-- ============================================================
+       HANDWERK & QUALITÄT
+       ============================================================ -->
+  <section class="craft" data-parallax-scene>
+    <div class="craft__inner">
+      <div class="craft__head" data-reveal>
+        <div class="featured__number">Atelier · München</div>
+        <h2 class="featured__title">Handwerk &amp; Qualität</h2>
+        <p class="craft__intro">
+          Jedes Werk entsteht vollständig in Eigenarbeit — vom Rahmen bis
+          zur fertigen Oberfläche. Vier Elemente, die jedes EMARÉ-Bild
+          ausmachen.
+        </p>
+      </div>
+
+      <ul class="craft__list" data-reveal data-reveal-delay="1">
+        <li class="craft__item">
+          <details>
+            <summary>
+              <span class="craft__name">Rahmenbau</span>
+              <span class="craft__icon" aria-hidden="true"></span>
+            </summary>
+            <div class="craft__body">
+              Jeder Keilrahmen wird in Handarbeit gefertigt — aus
+              ausgesuchtem, abgelagertem Holz, präzise verleimt und
+              verschraubt. Maße werden individuell auf das jeweilige Werk
+              abgestimmt, Standardformate gibt es nicht.
+            </div>
+          </details>
+        </li>
+        <li class="craft__item">
+          <details>
+            <summary>
+              <span class="craft__name">Leinwand</span>
+              <span class="craft__icon" aria-hidden="true"></span>
+            </summary>
+            <div class="craft__body">
+              Hochwertiges Baumwollgewebe wird von Hand auf den Rahmen
+              gespannt, grundiert und in mehreren Schichten vorbereitet —
+              bis die Oberfläche jenen samtigen Widerstand hat, der Farbe
+              und Spray erst tragen kann.
+            </div>
+          </details>
+        </li>
+        <li class="craft__item">
+          <details>
+            <summary>
+              <span class="craft__name">Farben</span>
+              <span class="craft__icon" aria-hidden="true"></span>
+            </summary>
+            <div class="craft__body">
+              Verwendet werden ausschließlich lichtechte Künstler-Acrylfarben
+              und Sprays in Profi-Qualität. Pigmentdicht, alterungsstabil und
+              Schicht für Schicht aufgebaut — für Tiefe, die auch in Jahren
+              noch atmet.
+            </div>
+          </details>
+        </li>
+        <li class="craft__item">
+          <details>
+            <summary>
+              <span class="craft__name">Schattenfugen</span>
+              <span class="craft__icon" aria-hidden="true"></span>
+            </summary>
+            <div class="craft__body">
+              Auf Wunsch wird jedes Werk in einen maßgefertigten
+              Schattenfugenrahmen gesetzt — schlicht in Schwarz, Weiß oder
+              naturbelassenem Holz. Die feine Fuge lässt das Bild scheinbar
+              schweben und hebt die handgefertigte Kante hervor.
+            </div>
+          </details>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FOOTER
+       ============================================================ -->
+  <footer class="site-footer">
+    <div>
+      <div class="site-footer__brand">EMARÉ Studio</div>
+      <div style="font-size: 11px; color: var(--ink-3); letter-spacing: 0.14em; margin-top: 6px;">by Emelie Marie</div>
+      <p style="margin-top: 18px; font-size: 12px; color: var(--ink-2); max-width: 280px; line-height: 1.7;">
+        Contemporary Art. Acryl &amp; Spray auf selbst gefertigter Leinwand.
+        München, DE.
+      </p>
+    </div>
+    <div>
+      <h4>Index</h4>
+      <a href="index.html">Home</a>
+      <a href="werke.html">Werke</a>
+      <a href="vita.html">Vita</a>
+      <a href="kontakt.html">Kontakt</a>
+    </div>
+    <div>
+      <h4>Kontakt</h4>
+      <a href="mailto:kontakt@emare-studio.com">kontakt@emare-studio.com</a>
+      <a href="#">Instagram · @emare.studio</a>
+      <a href="#">Portfolio PDF ↓</a>
+    </div>
+    <div class="site-footer__legal">
+      <span>© 2026 Emelie Marie · EMARÉ Studio</span>
+      <span>Impressum · Datenschutz</span>
+    </div>
+  </footer>
+
+  <script>
+/* ============================================================
+   EMARÉ Studio — Works data + procedural painting generator
+   ============================================================ */
+(function(global){
+
+const WORKS = [
+  {
+    id: '01', title: 'Innenraum I', series: 'Fragmente einer Stille', year: 2025,
+    size: '120 × 160 cm', material: 'Acryl, Spray, Pigment', traeger: 'Selbst gespannte Leinwand',
+    edition: 'Unikat', signature: 'rückseitig, EM · 25', status: 'Verfügbar', price: 'auf Anfrage',
+    ratio: [4, 5],
+    description: 'Erster Teil der Serie. Eine ockerfarbene Linie liegt unter einem leisen Sprühnebel — als würde der Raum durch das Pigment sichtbar.'
+  },
+  {
+    id: '02', title: 'Membran', series: 'Fragmente einer Stille', year: 2025,
+    size: '100 × 100 cm', material: 'Acryl, Spray', traeger: 'Selbst gespannte Leinwand',
+    edition: 'Unikat', signature: 'rückseitig, EM · 25', status: 'Verfügbar', price: 'auf Anfrage',
+    ratio: [1, 1],
+    description: 'Ein zentraler, fast atemloser Kern. Die Geste hat sich aufgelöst, was bleibt ist eine durchlässige Form.'
+  },
+  {
+    id: '03', title: 'Schwelle', series: 'Fragmente einer Stille', year: 2025,
+    size: '140 × 180 cm', material: 'Acryl, Spray', traeger: 'Selbst gespannte Leinwand',
+    edition: 'Unikat', signature: 'rückseitig, EM · 25', status: 'Verfügbar', price: 'auf Anfrage',
+    ratio: [4, 5],
+    description: 'Diagonale zwischen Innen und Aussen. Salbei trifft auf warmes Elfenbein, die Kante bleibt gemalt sichtbar.'
+  },
+  {
+    id: '04', title: 'Atem', series: 'Fragmente einer Stille', year: 2024,
+    size: '120 × 150 cm', material: 'Acryl, Spray', traeger: 'Selbst gespannte Leinwand',
+    edition: 'Unikat', signature: 'rückseitig, EM · 24', status: 'Reserviert', price: 'auf Anfrage',
+    ratio: [4, 5],
+    description: 'Ein blau-grauer Hauch in der Mitte. Beinahe monochrom — die Spannung liegt im Halbschatten.'
+  },
+  {
+    id: '05', title: 'Naht', series: 'Werkstattjahr', year: 2024,
+    size: '90 × 120 cm', material: 'Acryl, Spray, Pigment', traeger: 'Selbst gespannte Leinwand',
+    edition: 'Unikat', signature: 'rückseitig, EM · 24', status: 'Verfügbar', price: 'auf Anfrage',
+    ratio: [3, 4],
+    description: 'Zwei Felder durch eine handgesetzte Naht getrennt. Aus dem Werkstattjahr — Studie zur eigenen Technik.'
+  },
+  {
+    id: '06', title: 'Echo', series: 'Werkstattjahr', year: 2024,
+    size: '110 × 110 cm', material: 'Acryl, Spray', traeger: 'Selbst gespannte Leinwand',
+    edition: 'Unikat', signature: 'rückseitig, EM · 24', status: 'Verfügbar', price: 'auf Anfrage',
+    ratio: [1, 1],
+    description: 'Eine dunkle Form, die nachhallt. Der Rand löst sich in Sprühstaub auf — die Mitte hält das Schweigen.'
+  },
+];
+
+/* ---------- Helpers ---------- */
+
+function makeRng(seed) {
+  let s = seed | 0 || 1;
+  return function() {
+    s = (s * 1103515245 + 12345) | 0;
+    s = s & 0x7fffffff;
+    return s / 0x7fffffff;
+  };
+}
+
+function sprayCloud(opts) {
+  const { cx, cy, rx, ry = rx, count = 300, color = '#000', seed = 1, falloff = 0.7, minSize = 0.3, maxSize = 2.4, maxOp = 0.4 } = opts;
+  const rng = makeRng(seed);
+  const dots = [];
+  for (let i = 0; i < count; i++) {
+    const u = rng();
+    const r = Math.pow(u, falloff);
+    const theta = rng() * Math.PI * 2;
+    const x = cx + Math.cos(theta) * rx * r;
+    const y = cy + Math.sin(theta) * ry * r;
+    const sz = minSize + rng() * (maxSize - minSize);
+    const op = (0.05 + rng() * (maxOp - 0.05)) * (1 - r * 0.6);
+    dots.push(`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${sz.toFixed(2)}" fill="${color}" opacity="${op.toFixed(3)}"/>`);
+  }
+  return dots.join('');
+}
+
+function sprayRect(opts) {
+  const { x, y, w, h, count = 400, color = '#000', seed = 1, minSize = 0.3, maxSize = 2, maxOp = 0.35, biasY = 0 } = opts;
+  const rng = makeRng(seed);
+  const dots = [];
+  for (let i = 0; i < count; i++) {
+    let py = rng();
+    if (biasY > 0) py = Math.pow(py, 1 - biasY);
+    if (biasY < 0) py = Math.pow(py, 1 + Math.abs(biasY));
+    const px = rng();
+    const sz = minSize + rng() * (maxSize - minSize);
+    const op = 0.05 + rng() * (maxOp - 0.05);
+    dots.push(`<circle cx="${(x + px * w).toFixed(1)}" cy="${(y + py * h).toFixed(1)}" r="${sz.toFixed(2)}" fill="${color}" opacity="${op.toFixed(3)}"/>`);
+  }
+  return dots.join('');
+}
+
+function paintedBand(opts) {
+  const { x, y, w, h, color, opacity = 1, roughness = 6, seed = 1 } = opts;
+  const rng = makeRng(seed);
+  const steps = 60;
+  const pts = [];
+  for (let i = 0; i <= steps; i++) {
+    const px = x + (w * i / steps);
+    const wave = Math.sin(i * 0.3 + seed) * roughness * 0.4;
+    const n = (rng() - 0.5) * roughness;
+    const py = y + wave + n;
+    pts.push([px, py]);
+  }
+  let path = `M ${x} ${y + h}`;
+  path += ` L ${pts[0][0]} ${pts[0][1]}`;
+  for (const p of pts) path += ` L ${p[0].toFixed(1)} ${p[1].toFixed(1)}`;
+  path += ` L ${x + w} ${y + h} Z`;
+  return `<path d="${path}" fill="${color}" opacity="${opacity}"/>`;
+}
+
+function drip(x, y, length, color, opts = {}) {
+  const { width = 1.5, opacity = 0.55, seed = 1 } = opts;
+  const rng = makeRng(seed);
+  const steps = 10;
+  let path = `M ${x} ${y}`;
+  for (let i = 1; i <= steps; i++) {
+    const t = i / steps;
+    const px = x + (rng() - 0.5) * 2.5;
+    const py = y + length * t;
+    path += ` L ${px.toFixed(1)} ${py.toFixed(1)}`;
+  }
+  return `<path d="${path}" stroke="${color}" stroke-width="${width}" fill="none" opacity="${opacity}" stroke-linecap="round"/>
+<circle cx="${x.toFixed(1)}" cy="${(y + length).toFixed(1)}" r="${(width * 1.6).toFixed(2)}" fill="${color}" opacity="${opacity}"/>`;
+}
+
+function gestureLine(x1, y1, x2, y2, opts = {}) {
+  const { color = '#000', width = 1, opacity = 0.7, jitter = 2, seed = 1, steps = 40 } = opts;
+  const rng = makeRng(seed);
+  let path = `M ${x1} ${y1}`;
+  for (let i = 1; i <= steps; i++) {
+    const t = i / steps;
+    const bx = x1 + (x2 - x1) * t;
+    const by = y1 + (y2 - y1) * t;
+    const ox = (rng() - 0.5) * jitter;
+    const oy = (rng() - 0.5) * jitter;
+    path += ` L ${(bx + ox).toFixed(1)} ${(by + oy).toFixed(1)}`;
+  }
+  return `<path d="${path}" stroke="${color}" stroke-width="${width}" fill="none" opacity="${opacity}" stroke-linecap="round" stroke-linejoin="round"/>`;
+}
+
+function grain(seed = 1, op = 0.04) {
+  return `<rect width="100%" height="100%" fill="url(#grain-${seed})" opacity="${op}"/>`;
+}
+
+function defs(seed) {
+  return `
+    <filter id="soft-${seed}" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8"/>
+    </filter>
+    <filter id="softer-${seed}">
+      <feGaussianBlur stdDeviation="20"/>
+    </filter>
+    <filter id="grainFilter-${seed}">
+      <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" seed="${seed}"/>
+      <feColorMatrix values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.45 0"/>
+    </filter>
+    <pattern id="grain-${seed}" width="200" height="200" patternUnits="userSpaceOnUse">
+      <rect width="200" height="200" filter="url(#grainFilter-${seed})"/>
+    </pattern>
+    <filter id="brushBlur-${seed}">
+      <feGaussianBlur stdDeviation="3"/>
+    </filter>
+  `;
+}
+
+/* ---------- Paintings ---------- */
+
+function painting01() {
+  const W = 1000, H = 1250;
+  const ground = '#f1ebdd', ocher = '#a87b48', ocherDeep = '#6a4d2a', ink = '#1a1410';
+  return `<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+    <defs>${defs(1)}</defs>
+    <rect width="${W}" height="${H}" fill="${ground}"/>
+    ${sprayRect({ x: 0, y: 0, w: W, h: H, count: 500, color: '#a89476', seed: 7, minSize: 0.2, maxSize: 1.2, maxOp: 0.18 })}
+    <ellipse cx="${W*0.55}" cy="${H*0.5}" rx="${W*0.5}" ry="${H*0.25}" fill="#e5d6b4" opacity="0.4" filter="url(#softer-1)"/>
+    ${paintedBand({ x: -20, y: H*0.66, w: W+40, h: H*0.34+20, color: ocher, opacity: 0.92, roughness: 16, seed: 11 })}
+    ${paintedBand({ x: -20, y: H*0.82, w: W+40, h: H*0.18+20, color: ocherDeep, opacity: 0.55, roughness: 12, seed: 13 })}
+    ${sprayRect({ x: 0, y: H*0.5, w: W, h: H*0.2, count: 700, color: ocherDeep, seed: 21, minSize: 0.4, maxSize: 2.0, maxOp: 0.32, biasY: -0.5 })}
+    ${sprayRect({ x: 0, y: H*0.7, w: W, h: H*0.3, count: 400, color: ink, seed: 23, minSize: 0.3, maxSize: 1.3, maxOp: 0.22 })}
+    ${gestureLine(W*0.08, H*0.42, W*0.88, H*0.428, { color: ink, width: 0.7, opacity: 0.55, jitter: 1.4, seed: 31 })}
+    ${drip(W*0.18, H*0.68, H*0.12, ocherDeep, { width: 1.6, opacity: 0.7, seed: 41 })}
+    ${drip(W*0.42, H*0.66, H*0.06, ocherDeep, { width: 1.2, opacity: 0.55, seed: 42 })}
+    ${drip(W*0.74, H*0.69, H*0.18, ink, { width: 1.8, opacity: 0.55, seed: 43 })}
+    ${gestureLine(W*0.2, H*0.18, W*0.42, H*0.22, { color: ocherDeep, width: 6, opacity: 0.18, jitter: 5, seed: 51 })}
+    ${grain(1, 0.06)}
+  </svg>`;
+}
+
+function painting02() {
+  const W = 1200, H = 1200;
+  const ground = '#efe9df', dust = '#a8918d', dustDeep = '#6b5550', ink = '#1f1a18';
+  return `<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+    <defs>${defs(2)}</defs>
+    <rect width="${W}" height="${H}" fill="${ground}"/>
+    <ellipse cx="${W*0.5}" cy="${H*0.5}" rx="${W*0.45}" ry="${H*0.35}" fill="${dust}" opacity="0.32" filter="url(#softer-2)"/>
+    <ellipse cx="${W*0.52}" cy="${H*0.48}" rx="${W*0.28}" ry="${H*0.2}" fill="${dustDeep}" opacity="0.32" filter="url(#softer-2)"/>
+    ${sprayCloud({ cx: W*0.5, cy: H*0.5, rx: W*0.46, ry: H*0.4, count: 1400, color: dustDeep, seed: 5, falloff: 1.6, minSize: 0.3, maxSize: 2.0, maxOp: 0.42 })}
+    ${sprayCloud({ cx: W*0.5, cy: H*0.48, rx: W*0.22, ry: H*0.16, count: 500, color: ink, seed: 7, falloff: 0.8, minSize: 0.2, maxSize: 1.5, maxOp: 0.28 })}
+    ${gestureLine(W*0.18, H*0.62, W*0.82, H*0.622, { color: ink, width: 0.7, opacity: 0.4, jitter: 1.2, seed: 9 })}
+    ${gestureLine(W*0.08, H*0.15, W*0.32, H*0.27, { color: ink, width: 0.6, opacity: 0.18, jitter: 1.8, seed: 11 })}
+    ${drip(W*0.51, H*0.58, H*0.18, dustDeep, { width: 1.3, opacity: 0.55, seed: 13 })}
+    ${grain(2, 0.06)}
+  </svg>`;
+}
+
+function painting03() {
+  const W = 1000, H = 1250;
+  const cream = '#f0e9d8', sage = '#8a9788', sageDeep = '#5a685a', ink = '#1a1814';
+  const rngDiag = makeRng(19);
+  const diagonalDots = [];
+  for (let i = 0; i < 1000; i++) {
+    const t = rngDiag();
+    const bx = t * W;
+    const by = H * 0.55 + (H * 0.30) * t;
+    const spread = (rngDiag() - 0.5) * H * 0.22;
+    const sz = 0.3 + rngDiag() * 1.6;
+    const op = 0.05 + rngDiag() * 0.35 * (1 - Math.abs(spread) / (H * 0.11));
+    diagonalDots.push(`<circle cx="${bx.toFixed(1)}" cy="${(by + spread).toFixed(1)}" r="${sz.toFixed(2)}" fill="${sageDeep}" opacity="${Math.max(0, op).toFixed(3)}"/>`);
+  }
+  return `<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+    <defs>${defs(3)}</defs>
+    <rect width="${W}" height="${H}" fill="${cream}"/>
+    ${sprayRect({ x: 0, y: 0, w: W, h: H, count: 400, color: '#a89c80', seed: 17, minSize: 0.2, maxSize: 1.0, maxOp: 0.14 })}
+    <path d="M 0 ${H*0.55} C ${W*0.2} ${H*0.62}, ${W*0.4} ${H*0.66}, ${W*0.6} ${H*0.72} C ${W*0.78} ${H*0.78}, ${W*0.9} ${H*0.83}, ${W} ${H*0.85} L ${W} ${H} L 0 ${H} Z" fill="${sage}" opacity="0.85"/>
+    <path d="M 0 ${H*0.78} C ${W*0.25} ${H*0.83}, ${W*0.55} ${H*0.86}, ${W*0.8} ${H*0.9} L ${W} ${H*0.92} L ${W} ${H} L 0 ${H} Z" fill="${sageDeep}" opacity="0.5"/>
+    ${diagonalDots.join('')}
+    ${gestureLine(0, H*0.555, W*0.2, H*0.625, { color: ink, width: 1.2, opacity: 0.5, jitter: 2.2, seed: 21, steps: 30 })}
+    ${gestureLine(W*0.2, H*0.625, W*0.6, H*0.725, { color: ink, width: 1, opacity: 0.45, jitter: 1.8, seed: 22, steps: 40 })}
+    ${gestureLine(W*0.6, H*0.725, W, H*0.852, { color: ink, width: 1.2, opacity: 0.5, jitter: 2.2, seed: 23, steps: 40 })}
+    ${drip(W*0.22, H*0.7, H*0.14, sageDeep, { width: 1.4, opacity: 0.55, seed: 31 })}
+    ${drip(W*0.55, H*0.74, H*0.1, sageDeep, { width: 1.3, opacity: 0.5, seed: 32 })}
+    ${drip(W*0.82, H*0.86, H*0.08, ink, { width: 1.5, opacity: 0.55, seed: 33 })}
+    ${sprayRect({ x: 0, y: 0, w: W, h: H*0.5, count: 300, color: ink, seed: 41, minSize: 0.2, maxSize: 1.0, maxOp: 0.1 })}
+    ${grain(3, 0.05)}
+  </svg>`;
+}
+
+function painting04() {
+  const W = 1000, H = 1250;
+  const ground = '#e8e9e4', haze = '#a4abae', hazeDeep = '#6a7378', ink = '#1a1d1f';
+  return `<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+    <defs>${defs(4)}</defs>
+    <rect width="${W}" height="${H}" fill="${ground}"/>
+    <ellipse cx="${W*0.5}" cy="${H*0.4}" rx="${W*0.7}" ry="${H*0.5}" fill="#dde1de" opacity="0.7" filter="url(#softer-4)"/>
+    <ellipse cx="${W*0.5}" cy="${H*0.5}" rx="${W*0.18}" ry="${H*0.28}" fill="${haze}" opacity="0.55" filter="url(#softer-4)"/>
+    <ellipse cx="${W*0.5}" cy="${H*0.5}" rx="${W*0.12}" ry="${H*0.2}" fill="${hazeDeep}" opacity="0.4" filter="url(#softer-4)"/>
+    ${sprayCloud({ cx: W*0.5, cy: H*0.5, rx: W*0.28, ry: H*0.36, count: 1200, color: hazeDeep, seed: 5, falloff: 1.4, minSize: 0.3, maxSize: 1.8, maxOp: 0.38 })}
+    ${sprayCloud({ cx: W*0.5, cy: H*0.5, rx: W*0.1, ry: H*0.18, count: 500, color: ink, seed: 7, falloff: 0.7, minSize: 0.25, maxSize: 1.2, maxOp: 0.28 })}
+    ${gestureLine(W*0.1, H*0.16, W*0.9, H*0.165, { color: ink, width: 0.6, opacity: 0.4, jitter: 1.2, seed: 9 })}
+    ${drip(W*0.5, H*0.76, H*0.1, hazeDeep, { width: 1.2, opacity: 0.5, seed: 11 })}
+    ${sprayRect({ x: 0, y: 0, w: W, h: H, count: 500, color: hazeDeep, seed: 13, minSize: 0.15, maxSize: 0.7, maxOp: 0.12 })}
+    ${grain(4, 0.05)}
+  </svg>`;
+}
+
+function painting05() {
+  const W = 900, H = 1200;
+  const putty = '#c7b6a0', puttyDeep = '#9c8b76', charcoal = '#2a231d', charcoalDeep = '#1a1612', ink = '#0c0a08';
+  return `<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+    <defs>${defs(5)}</defs>
+    <rect width="${W}" height="${H}" fill="${putty}"/>
+    <path d="M ${W*0.52} 0 C ${W*0.51} ${H*0.25}, ${W*0.535} ${H*0.5}, ${W*0.515} ${H*0.75} C ${W*0.505} ${H*0.9}, ${W*0.52} ${H*0.95}, ${W*0.51} ${H} L ${W} ${H} L ${W} 0 Z" fill="${charcoal}"/>
+    ${sprayRect({ x: 0, y: 0, w: W*0.52, h: H, count: 500, color: puttyDeep, seed: 7, minSize: 0.25, maxSize: 1.2, maxOp: 0.2 })}
+    ${sprayRect({ x: W*0.5, y: 0, w: W*0.5, h: H, count: 500, color: charcoalDeep, seed: 11, minSize: 0.25, maxSize: 1.2, maxOp: 0.35 })}
+    ${sprayRect({ x: W*0.42, y: 0, w: W*0.2, h: H, count: 1200, color: ink, seed: 13, minSize: 0.3, maxSize: 1.8, maxOp: 0.4 })}
+    ${gestureLine(W*0.515, 0, W*0.51, H, { color: ink, width: 1.4, opacity: 0.7, jitter: 2.5, seed: 17, steps: 80 })}
+    ${gestureLine(W*0.518, 0, W*0.515, H, { color: ink, width: 0.6, opacity: 0.4, jitter: 1.5, seed: 19, steps: 80 })}
+    ${gestureLine(W*0.08, H*0.18, W*0.46, H*0.185, { color: ink, width: 0.5, opacity: 0.35, jitter: 1.2, seed: 21 })}
+    ${gestureLine(W*0.6, H*0.22, W*0.92, H*0.224, { color: '#d4c4ad', width: 0.5, opacity: 0.4, jitter: 1.2, seed: 23 })}
+    ${drip(W*0.62, H*0.45, H*0.22, charcoalDeep, { width: 1.3, opacity: 0.6, seed: 25 })}
+    ${drip(W*0.84, H*0.3, H*0.14, ink, { width: 1.1, opacity: 0.55, seed: 27 })}
+    ${gestureLine(W*0.05, H*0.94, W*0.95, H*0.945, { color: ink, width: 5, opacity: 0.2, jitter: 6, seed: 29 })}
+    ${grain(5, 0.05)}
+  </svg>`;
+}
+
+function painting06() {
+  const W = 1200, H = 1200;
+  const ground = '#cdc6ba', groundLight = '#ddd6c8', charcoal = '#2a221c', charcoalDeep = '#15110d', accent = '#8a4034', ink = '#0a0806';
+  return `<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+    <defs>${defs(6)}</defs>
+    <rect width="${W}" height="${H}" fill="${ground}"/>
+    <ellipse cx="${W*0.3}" cy="${H*0.3}" rx="${W*0.5}" ry="${H*0.4}" fill="${groundLight}" opacity="0.7" filter="url(#softer-6)"/>
+    <ellipse cx="${W*0.58}" cy="${H*0.46}" rx="${W*0.22}" ry="${H*0.26}" fill="${charcoal}" opacity="0.78" filter="url(#soft-6)"/>
+    <ellipse cx="${W*0.58}" cy="${H*0.46}" rx="${W*0.15}" ry="${H*0.18}" fill="${charcoalDeep}" opacity="0.65" filter="url(#soft-6)"/>
+    <ellipse cx="${W*0.58}" cy="${H*0.46}" rx="${W*0.07}" ry="${H*0.08}" fill="${ink}" opacity="0.7" filter="url(#brushBlur-6)"/>
+    ${sprayCloud({ cx: W*0.58, cy: H*0.46, rx: W*0.4, ry: H*0.45, count: 2000, color: charcoalDeep, seed: 5, falloff: 1.8, minSize: 0.3, maxSize: 2.0, maxOp: 0.4 })}
+    ${sprayCloud({ cx: W*0.58, cy: H*0.46, rx: W*0.16, ry: H*0.2, count: 500, color: ink, seed: 7, falloff: 0.7, minSize: 0.3, maxSize: 1.6, maxOp: 0.5 })}
+    <circle cx="${W*0.22}" cy="${H*0.74}" r="${W*0.018}" fill="${accent}" opacity="0.85" filter="url(#brushBlur-6)"/>
+    ${sprayCloud({ cx: W*0.22, cy: H*0.74, rx: W*0.05, ry: W*0.05, count: 150, color: accent, seed: 9, falloff: 0.8, minSize: 0.3, maxSize: 1.2, maxOp: 0.45 })}
+    ${gestureLine(W*0.58, H*0.68, W*0.55, H*0.92, { color: charcoalDeep, width: 8, opacity: 0.18, jitter: 4, seed: 11, steps: 30 })}
+    ${drip(W*0.5, H*0.66, H*0.16, charcoalDeep, { width: 1.5, opacity: 0.65, seed: 13 })}
+    ${drip(W*0.66, H*0.7, H*0.12, ink, { width: 1.3, opacity: 0.6, seed: 14 })}
+    ${gestureLine(W*0.1, H*0.14, W*0.42, H*0.145, { color: ink, width: 0.5, opacity: 0.3, jitter: 1.2, seed: 15 })}
+    ${grain(6, 0.06)}
+  </svg>`;
+}
+
+const paintings = { '01': painting01, '02': painting02, '03': painting03, '04': painting04, '05': painting05, '06': painting06 };
+
+function artworkSVG(workId) {
+  const fn = paintings[workId];
+  return fn ? fn() : '';
+}
+
+function workById(id) { return WORKS.find(w => w.id === id); }
+function nextWork(id) { const i = WORKS.findIndex(w => w.id === id); return WORKS[(i + 1) % WORKS.length]; }
+function prevWork(id) { const i = WORKS.findIndex(w => w.id === id); return WORKS[(i - 1 + WORKS.length) % WORKS.length]; }
+
+global.EMARE = { WORKS, artworkSVG, workById, nextWork, prevWork };
+
+})(window);
+  </script>
+
+  <script>
+/* ============================================================
+   EMARÉ Studio — Site-wide JS
+   Parallax · Header behavior · Reveal on scroll
+   ============================================================ */
+(function(){
+  let rafId = null;
+  const siteHeader = document.querySelector('.site-header');
+
+  function updateParallax() {
+    rafId = null;
+    const y = window.scrollY || window.pageYOffset;
+    document.querySelectorAll('[data-parallax]').forEach(el => {
+      const speed = parseFloat(el.dataset.parallax);
+      const scene = el.closest('[data-parallax-scene]') || document.body;
+      const sceneTop = scene.getBoundingClientRect().top + window.scrollY;
+      const local = Math.max(0, y - sceneTop);
+      const t = local * (1 - speed);
+      el.style.transform = `translate3d(${el.dataset.parallaxX || 0}, ${t.toFixed(2)}px, 0)`;
+    });
+    if (siteHeader) {
+      siteHeader.classList.toggle('site-header--scrolled', y > 20);
+    }
+  }
+
+  function onScroll() {
+    if (rafId == null) rafId = requestAnimationFrame(updateParallax);
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+
+  const observer = ('IntersectionObserver' in window) ? new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('is-revealed');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.15 }) : null;
+
+  function bindReveal() {
+    document.querySelectorAll('[data-reveal]').forEach(el => {
+      if (observer) observer.observe(el);
+      else el.classList.add('is-revealed');
+    });
+  }
+
+  function init() {
+    bindReveal();
+    updateParallax();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+  </script>
+
+  <script>
+    // Render hero + featured artworks
+    document.getElementById('hero-art').innerHTML = EMARE.artworkSVG('01');
+    document.getElementById('featured-01').innerHTML = EMARE.artworkSVG('01');
+    document.getElementById('featured-02').innerHTML = EMARE.artworkSVG('02');
+    document.getElementById('featured-03').innerHTML = EMARE.artworkSVG('03');
+
+    // Render works index list
+    const list = document.getElementById('works-index-list');
+    const preview = document.getElementById('works-index-preview');
+
+    EMARE.WORKS.forEach(w => {
+      const li = document.createElement('li');
+      li.className = 'works-index__row';
+      li.dataset.workId = w.id;
+      li.innerHTML = `
+        <span class="works-index__num">${w.id}</span>
+        <span class="works-index__title-text">${w.title}</span>
+        <span class="works-index__meta">${w.material}</span>
+        <span class="works-index__year">${w.year} · ${w.size}</span>
+        <span class="works-index__arrow">→</span>
+      `;
+      li.addEventListener('click', () => {
+        window.location.href = `werk.html?id=${w.id}`;
+      });
+      li.addEventListener('mouseenter', () => {
+        preview.innerHTML = EMARE.artworkSVG(w.id);
+        preview.classList.add('is-active');
+      });
+      li.addEventListener('mouseleave', () => {
+        preview.classList.remove('is-active');
+      });
+      list.appendChild(li);
+    });
+
+    document.addEventListener('mousemove', (e) => {
+      preview.style.left = e.clientX + 'px';
+      preview.style.top = e.clientY + 'px';
+    });
+  </script>
+
+</body>
+</html>
