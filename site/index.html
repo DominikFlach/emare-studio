@@ -1068,8 +1068,9 @@ function painting06() {
 const paintings = { '01': painting01, '02': painting02, '03': painting03, '04': painting04, '05': painting05, '06': painting06 };
 
 function artworkSVG(workId) {
-  const fn = paintings[workId];
-  return fn ? fn() : '';
+  const w = workById(workId);
+  const alt = w ? w.title : '';
+  return `<img src="img/${workId}.jpg" style="width:100%;height:100%;object-fit:cover;display:block;" alt="${alt}">`;
 }
 
 function workById(id) { return WORKS.find(w => w.id === id); }
