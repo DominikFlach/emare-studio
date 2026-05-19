@@ -1070,7 +1070,8 @@ const paintings = { '01': painting01, '02': painting02, '03': painting03, '04': 
 function artworkSVG(workId) {
   const w = workById(workId);
   const alt = w ? w.title : '';
-  return `<img src="img/${workId}.jpg" style="width:100%;height:100%;object-fit:cover;display:block;" alt="${alt}">`;
+  const slug = w ? w.title.replace(/\s+/g, '-') : workId;
+  return `<img src="img/${workId}-${slug}.jpg" style="width:100%;height:100%;object-fit:cover;display:block;" alt="${alt}">`;
 }
 
 function workById(id) { return WORKS.find(w => w.id === id); }
