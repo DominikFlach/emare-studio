@@ -1097,6 +1097,7 @@ global.EMARE = { WORKS, artworkSVG, workById, nextWork, prevWork };
     rafId = null;
     const y = window.scrollY || window.pageYOffset;
     document.querySelectorAll('[data-parallax]').forEach(el => {
+      if (el.classList.contains('artwork') || el.classList.contains('home-hero__art') || el.classList.contains('home-hero__left')) return;
       const speed = parseFloat(el.dataset.parallax);
       const scene = el.closest('[data-parallax-scene]') || document.body;
       const sceneTop = scene.getBoundingClientRect().top + window.scrollY;
