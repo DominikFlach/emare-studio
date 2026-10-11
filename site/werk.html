@@ -44,6 +44,10 @@ a { color:inherit; text-decoration:none; }
 .detail__thumb svg { display:block; width:100%; height:100%; }
 .detail__thumb-inner { position:absolute; inset:0; transform-origin:center center; transition:transform 0.6s cubic-bezier(0.2,0.7,0.2,1); }
 .detail__thumb:hover .detail__thumb-inner { transform:scale(2.2) !important; }
+.detail__thumb--pick { display:block; padding:0; font:inherit; cursor:pointer; transition:border-color 0.25s, opacity 0.25s; opacity:0.6; }
+.detail__thumb--pick:hover { opacity:1; }
+.detail__thumb--pick.is-active { border-color:var(--ink); opacity:1; }
+.detail__thumb--pick img { display:block; width:100%; height:100%; object-fit:cover; }
 .detail__thumb-label { position:absolute; bottom:8px; left:8px; font-size:9px; letter-spacing:0.18em; text-transform:uppercase; font-weight:500; color:var(--ink); background:rgba(255,255,255,0.92); padding:3px 7px; z-index:2; }
 
 .detail__title { font-weight:200; font-size:clamp(48px,5.5vw,88px); line-height:0.96; letter-spacing:-0.02em; margin:0; }
@@ -133,6 +137,7 @@ const WORKS=[
   {id:'07',title:'Momentum',series:'Soft Spaces',year:2026,size:'200 × 138 cm',material:'Acryl',traeger:'Handbespannte Leinwand auf selbst gebautem Holzrahmen',edition:'Unikat',status:'Verfügbar',price:'auf Anfrage',ratio:[4,5],description:'Energie wird zu Bewegung.'},
   {id:'08',title:'Surge',series:'Soft Spaces',year:2026,size:'200 × 138 cm',material:'Acryl',traeger:'Handbespannte Leinwand auf selbst gebautem Holzrahmen',edition:'Unikat',status:'Verfügbar',price:'auf Anfrage',ratio:[4,5],description:'Energie durchbricht die Stille.'},
   {id:'09',title:'Pulse',series:'Soft Spaces',year:2026,size:'160 × 120 cm',material:'Acryl',traeger:'Handbespannte Leinwand auf selbst gebautem Holzrahmen',edition:'Unikat',status:'Verfügbar',price:'auf Anfrage',ratio:[4,5],description:'Energie findet ihren Rhythmus.'},
+  {id:'10',title:'Afterlight',series:'Soft Spaces',year:2026,size:'160 × 120 cm',material:'Acryl',traeger:'Handbespannte Leinwand auf selbst gebautem Holzrahmen',edition:'Unikat',status:'Verfügbar',price:'auf Anfrage',ratio:[4,5],images:['10-Afterlight.jpg','10-Afterlight-2.jpg','10-Afterlight-3.jpg'],description:'Wo Licht zur Erinnerung wird.'},
 ];
 function makeRng(seed){let s=seed|0||1;return function(){s=(s*1103515245+12345)|0;s=s&0x7fffffff;return s/0x7fffffff;};}
 function sprayCloud(o){const{cx,cy,rx,ry=rx,count=300,color='#000',seed=1,falloff=0.7,minSize=0.3,maxSize=2.4,maxOp=0.4}=o;const rng=makeRng(seed);const d=[];for(let i=0;i<count;i++){const u=rng();const r=Math.pow(u,falloff);const t=rng()*Math.PI*2;const x=cx+Math.cos(t)*rx*r;const y=cy+Math.sin(t)*ry*r;const sz=minSize+rng()*(maxSize-minSize);const op=(0.05+rng()*(maxOp-0.05))*(1-r*0.6);d.push(`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${sz.toFixed(2)}" fill="${color}" opacity="${op.toFixed(3)}"/>`);}return d.join('');}
@@ -173,18 +178,31 @@ global.EMARE={WORKS,artworkSVG,workById,nextWork,prevWork};
       // Thumbnail crops: three different viewBox regions
       const thumbSvg = (transform) => `<div class="detail__thumb-inner" style="transform:${transform}">${svg}</div>`;
 
+      // Mehrere Bilder (w.images): Auswahl-Thumbnails, Klick tauscht das Hauptbild.
+      // Werke ohne w.images behalten die bisherige einzelne "Gesamt"-Vorschau.
+      const multi = Array.isArray(w.images) && w.images.length > 1;
+      const thumbsHtml = multi
+        ? w.images.map((f, i) => {
+            const label = i === 0 ? 'Gesamt' : 'Detail ' + i;
+            return `<button type="button" class="detail__thumb detail__thumb--pick${i === 0 ? ' is-active' : ''}" data-src="img/${f}" aria-label="${w.title} – ${label}">
+                <img src="img/${f}" alt="${w.title} – ${label}" loading="lazy">
+                <span class="detail__thumb-label">${label}</span>
+              </button>`;
+          }).join('')
+        : `<div class="detail__thumb" style="overflow:hidden;">
+                <div class="detail__thumb-inner" style="transform:scale(1) translate(0,0);">${svg}</div>
+                <span class="detail__thumb-label">Gesamt</span>
+              </div>`;
+
       document.getElementById('detail-root').innerHTML = `
         <p class="detail__crumbs">
           <a href="werke.html">← Alle Werke</a>
         </p>
         <div class="detail__grid">
           <div>
-            <div class="artwork detail__main" style="aspect-ratio:${ar}">${svg}</div>
+            <div class="artwork detail__main" id="detail-main" style="aspect-ratio:${ar}">${svg}</div>
             <div class="detail__thumbs">
-              <div class="detail__thumb" style="overflow:hidden;">
-                <div class="detail__thumb-inner" style="transform:scale(1) translate(0,0);">${svg}</div>
-                <span class="detail__thumb-label">Gesamt</span>
-              </div>
+              ${thumbsHtml}
             </div>
           </div>
           <div>
@@ -213,6 +231,14 @@ global.EMARE={WORKS,artworkSVG,workById,nextWork,prevWork};
           </a>
         </div>
       `;
+
+      document.querySelectorAll('.detail__thumb--pick').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const mainImg = document.querySelector('#detail-main img');
+          if (mainImg) mainImg.src = btn.dataset.src;
+          document.querySelectorAll('.detail__thumb--pick').forEach(b => b.classList.toggle('is-active', b === btn));
+        });
+      });
     }
 
     const hdr = document.querySelector('.site-header');
